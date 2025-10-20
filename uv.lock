@@ -107,10 +107,14 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "caldav" },
+    { name = "icalendar" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "caldav", specifier = ">=2.0.1" }]
+requires-dist = [
+    { name = "caldav", specifier = ">=2.0.1" },
+    { name = "icalendar", specifier = ">=6.0.0" },
+]
 
 [[package]]
 name = "idna"
