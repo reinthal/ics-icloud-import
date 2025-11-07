@@ -26,13 +26,28 @@
   # services.postgres.enable = true;
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = ''
-    echo hello from $GREET
+  scripts.exec-from-repo-root.exec = ''
+    repo_root=$(git rev-parse --show-toplevel)
+    pushd $repo_root 1>/dev/null
+    eval $@
+    popd 1>/dev/null
+  '';
+  scripts.import.exec = ''
+    echo
+    echo "$(date): IMPORTING $1"
+    exec-from-repo-root python3 main.py $1
+    echo
   '';
 
   enterShell = ''
-    hello
-    git --version
+        echo
+        echo
+    echo -e "\033[32m"
+        echo "ICS IMPORTER INSTALLED"
+        echo 'run `import <booking.ics>` to import file'
+        echo
+          echo -e "\033[0m"
+
   '';
 
   # https://devenv.sh/tasks/
